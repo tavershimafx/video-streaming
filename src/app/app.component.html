@@ -1,0 +1,408 @@
+<section class="studio">
+  <div class="layout">
+    <aside class="aside">
+      <nav class="left-nav">
+        <ul>
+          <li class="active pointer" (click)="home()"><i class="fa fa-home"></i> Home</li>
+          <li><i class="fa fa-qrcode"></i> Browse</li>
+          <li><i class="fa-regular fa-heart"></i> Favorite</li>
+          <li><i class="fa fa-headphones"></i> Library</li>
+        </ul>
+      </nav>
+      <nav class="playlist">
+        <div class="label">
+          <p>Playlist</p>
+          <i class="fa fa-circle-plus"></i>
+        </div>
+        <ul>
+          <li>For work place</li>
+          <li>Rich Brian's collection</li>
+          <li>deep focus</li>
+          <li>Lo-fi Jazz upbeat</li>
+          <li>For wokplace</li>
+          <li>Christmas playlist</li>
+        </ul>
+      </nav>
+    </aside>
+    <div class="arena" *ngIf="!showDetails">
+      <div class="now-playing">
+        <div class="search-container">
+          <div class="search">
+            <form (submit)="search()">
+              <span class="sc"><i class="fa fa-search"></i></span>
+              <input type="text" [(ngModel)]="query" [ngModelOptions]="{standalone: true}" placeholder="search artists, songs, albums">
+              <span class="mic"><i class="fa fa-microphone"></i></span>
+            </form>
+          </div>
+        </div>
+        <div class="quick-actions">
+          <div class="genres">
+            <p>R&B</p>
+            <p>Pop</p>
+            <p>Rap</p>
+            <p>Ballad</p>
+            <p>Country</p>
+            <p>Hip Hop</p>
+          </div>
+          <div class="current">
+            <p class="label">FEATURED SONGS</p>
+            <p class="artist">Post Malone</p>
+            <p class="title">Circles</p>
+            <div class="actions">
+              <span><i class="fa-solid fa-ellipsis-h"></i></span>
+              <span><i class="fa-regular fa-heart"></i></span>
+              <button class="">Play</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="new-release">
+        <div class="label">
+          <p>New Releases <i class="fa fa-circle-play"></i></p>
+        </div>
+        <div class="items">
+          <div class="item" *ngFor="let movie of movies" (click)="movieDetails(movie.imdbID)">
+            <div class="cover-image">
+              <img [src]="movie.poster" alt="">
+            </div>
+            <p class="album">{{movie.title}}</p>
+            <p class="artist">{{movie.type}}</p>
+          </div>
+          <div *ngIf="preLoading">
+            <div class="item-mask" *ngFor="let item of range">
+              <div class="cover-image-mask animated-background">
+               
+              </div>
+              <p class="album-mask"></p>
+              <p class="artist-mask"></p>
+            </div>
+          </div>
+          
+
+          <!--<div class="item">
+            <div class="cover-image">
+              <img src="../assets/images/Doja_Cat.jpeg" alt="">
+            </div>
+            <p class="album">Need To Know</p>
+            <p class="artist">Dojo Cat</p>
+          </div>
+          <div class="item">
+            <div class="cover-image">
+              <img src="../assets/images/The_Weeknd.png" alt="">
+            </div>
+            <p class="album">After Hours</p>
+            <p class="artist">The Weeknd</p>
+          </div>
+          <div class="item">
+            <div class="cover-image">
+              <img src="../assets/images/hit-machine.jpg" alt="">
+            </div>
+            <p class="album">HIT MACHINE</p>
+            <p class="artist">Sound Wave</p>
+          </div>
+          <div class="item">
+            <div class="cover-image">
+              <img src="../assets/images/Taylor_Swift_Red.png" alt="">
+            </div>
+            <p class="album">Red (Taylor's Version)</p>
+            <p class="artist">Ca si</p>
+          </div>
+          <div class="item">
+            <div class="cover-image">
+              <img src="../assets/images/Doja_Cat.jpeg" alt="">
+            </div>
+            <p class="album">Need To Know</p>
+            <p class="artist">Dojo Cat</p>
+          </div>
+          <div class="item">
+            <div class="cover-image">
+              <img src="../assets/images/The_Weeknd.png" alt="">
+            </div>
+            <p class="album">After Hours</p>
+            <p class="artist">The Weeknd</p>
+          </div>-->
+
+        </div>
+      </section>
+      
+      <!-- <div class="suggestions">
+        <p class="label">You may like</p>
+        <div class="cover">
+          <div class="cover-image">
+            <img src="../assets/images/shaun.png" alt="">
+          </div>
+          <p class="album">Way back</p>
+          <p class="artist">SHAUN</p>
+        </div>
+        <div class="cover ml-80">
+          <div class="cover-image">
+            <img src="../assets/images/clean-bandit.jpg" alt="">
+          </div>
+          <p class="album">Rockabye</p>
+          <p class="artist">The Clean Bandit</p>
+        </div>
+        <div class="cover ml-80">
+          <div class="cover-image">
+            <img src="../assets/images/kanye.jpg" alt="">
+          </div>
+          <p class="album">Graduation</p>
+          <p class="artist">Kanye West</p>
+        </div>
+        <div class="cover ml-80">
+          <div class="cover-image">
+            <img src="../assets/images/zedd.jpg" alt="">
+          </div>
+          <p class="album">Stay</p>
+          <p class="artist">Zedd</p>
+        </div>
+        <div class="cover ml-80">
+          <div class="cover-image">
+            <img src="../assets/images/gayle.jpg" alt="">
+          </div>
+          <p class="album">abcdefu</p>
+          <p class="artist">GAYLE</p>
+        </div>
+        <div class="cover ml-80">
+          <div class="cover-image">
+            <img src="../assets/images/ed-sheeran.png" alt="">
+          </div>
+          <p class="album">Bad Habits</p>
+          <p class="artist">Ed Sheeran</p>
+        </div>
+        <div class="cover ml-80">
+          <div class="cover-image">
+            <img src="../assets/images/pink-sweats.jpg" alt="">
+          </div>
+          <p class="album">At My Worst</p>
+          <p class="artist">Pink Sweat$</p>
+        </div>
+      </div> -->
+
+      <div class="playlist">
+        <div class="label">
+          <p>Recently played <i class="fa fa-circle-pause"></i></p>
+        </div>
+        <div class="">
+          <table>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td class="mq"><img src="../assets/images/maria-carey.jpg" alt="">All I want for Christmas is you</td>
+                <td>Maria Cary</td>
+                <td>Album</td>
+                <td>
+                  <div class="actions">
+                    <span>3:54</span>
+                    <span><i class="fa-regular fa-heart"></i></span>
+                    <span><i class="fa-solid fa-bars-progress"></i></span>
+                  </div>
+                </td>
+              </tr>
+              <tr class="active">
+                <td><i class="fa-regular fa-circle-pause"></i></td>
+                <td class="mq"><img src="../assets/images/rose.jpg" alt="">On The Ground</td>
+                <td>Rose</td>
+                <td>-R-</td>
+                <td>
+                  <div class="actions">
+                    <span>3:54</span>
+                    <span><i class="fa-regular fa-heart"></i></span>
+                    <span><i class="fa-solid fa-bars-progress"></i></span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td class="mq"><img src="../assets/images/donda.jpg" alt="">Donda</td>
+                <td>Kanye West</td>
+                <td>Donda</td>
+                <td>
+                  <div class="actions">
+                    <span>3:54</span>
+                    <span><i class="fa-regular fa-heart"></i></span>
+                    <span><i class="fa-solid fa-bars-progress"></i></span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="arena details" *ngIf="showDetails">
+      <div class="movie-details">
+        <img class="poster" [src]="detail?.poster" />
+        <div class="inscriptions">
+          <p class="mt-0">Title: <span>{{detail?.title}}</span></p>
+          <div>
+            <p>Release: <span>{{detail?.released}}</span></p>
+            <p>Genre: <span>{{detail?.genre}}</span></p>
+          </div>
+          <p>Rating: <span>{{detail?.imdbRating}}</span></p>
+        </div>
+      </div>
+      <p class="plot">{{detail?.plot}}</p>
+    </div>
+
+    <div class="streams">
+      <div class="top-streams">
+        <div class="local-global">
+          <p class="label">Top Streams Real-time</p>
+          <div class="">
+            <span>Local</span>
+            <span>Global</span>
+          </div>
+        </div>
+        <table>
+          <tbody>
+            <tr class="top-streams">
+              <td>1</td>
+              <td class="mq">
+                <img src="../assets/images/Mistletoe.jpg" alt="">
+                <div class="release">
+                  <p class="album">Mistletoe</p>
+                  <p class="artist">Justin Bieber</p>
+                </div>
+              </td>
+              <td>
+                <div class="actions">
+                  <span>3:54</span>
+                  <span><i class="fa-regular fa-heart"></i></span>
+                  <span>12k</span>
+                </div>
+              </td>
+            </tr>
+            <tr class="top-streams">
+              <td>2</td>
+              <td class="mq">
+                <img src="../assets/images/easy-on-me.jpg" alt="">
+                <div class="release">
+                  <p class="album">Easy on Me</p>
+                  <p class="artist">Adele</p>
+                </div>
+              </td>
+              <td>
+                <div class="actions">
+                  <span>3:54</span>
+                  <span><i class="fa-regular fa-heart"></i></span>
+                  <span>7k</span>
+                </div>
+              </td>
+            </tr>
+            <tr class="top-streams">
+              <td>3</td>
+              <td class="mq">
+                <img src="../assets/images/public-library.jpg" alt="">
+                <div class="release">
+                  <p class="album">Moonlight</p>
+                  <p class="artist">Public Library...</p>
+                </div>
+              </td>
+              <td>
+                <div class="actions">
+                  <span>3:54</span>
+                  <span><i class="fa-regular fa-heart"></i></span>
+                  <span>2.5k</span>
+                </div>
+              </td>
+            </tr>
+            <tr class="top-streams">
+              <td>4</td>
+              <td class="mq">
+                <img src="../assets/images/sicko-mode.png" alt="">
+                <div class="release">
+                  <p class="album">SICKO MODE</p>
+                  <p class="artist">Travis Scott ft. Drake</p>
+                </div>
+              </td>
+              <td>
+                <div class="actions">
+                  <span>3:54</span>
+                  <span><i class="fa-regular fa-heart"></i></span>
+                  <span>7k</span>
+                </div>
+              </td>
+            </tr>
+            <tr class="top-streams">
+              <td>5</td>
+              <td class="mq">
+                <img src="../assets/images/get-lost.jpg" alt="">
+                <div class="release">
+                  <p class="album">Get Lost</p>
+                  <p class="artist">Vincent Fabie</p>
+                </div>
+              </td>
+              <td>
+                <div class="actions">
+                  <span>3:54</span>
+                  <span><i class="fa-regular fa-heart"></i></span>
+                  <span>2.5k</span>
+                </div>
+              </td>
+            </tr>
+            <tr class="top-streams">
+              <td>6</td>
+              <td class="mq">
+                <img src="../assets/images/i-feel-good.jpg" alt="">
+                <div class="release">
+                  <p class="album">I feel Good</p>
+                  <p class="artist">Pink Sweat$</p>
+                </div>
+              </td>
+              <td>
+                <div class="actions">
+                  <span>3:54</span>
+                  <span><i class="fa-regular fa-heart"></i></span>
+                  <span>7k</span>
+                </div>
+              </td>
+            </tr>
+            <tr class="top-streams">
+              <td>7</td>
+              <td class="mq">
+                <img src="../assets/images/mid-summer.jpg" alt="">
+                <div class="release">
+                  <p class="album">Midsummer </p>
+                  <p class="artist">88rising</p>
+                </div>
+              </td>
+              <td>
+                <div class="actions">
+                  <span>3:54</span>
+                  <span><i class="fa-regular fa-heart"></i></span>
+                  <span>2.5k</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="media-controls">
+      <div class="control"><i class="fa-solid fa-shuffle"></i></div>
+      <div class="control"><i class="fa-solid fa-backward-step"></i></div>
+      <div class="control pause"><i class="fa-solid fa-circle-pause"></i></div>
+      <div class="control"><i class="fa-solid fa-forward-step"></i></div>
+      <div class="control"><i class="fa-solid fa-repeat"></i></div>
+    </div>
+    <div class="current-media">
+      <div class="media-image"><img src="../assets/images/avatar-1.png" alt="playing"></div>
+      <div class="play-head">
+        <div class="media-title">On the ground Rose</div>
+        <span class="start">02:10</span>
+        <div class="play-progress"><div class="indicator"></div></div>
+        <span class="end">04:24</span>
+      </div>
+    </div>
+    <div class="multi-controls">
+      <div class="control"><i class="fa-solid fa-comment"></i></div>
+      <div class="control"><i class="fa-solid fa-playlist"></i></div>
+      <div class="control"><i class="fa-solid fa-heart"></i></div>
+      <div class="control"><i class="fa-solid fa-ellipsis-h"></i></div>
+      <div class="control"><i class="fa-solid fa-volume-high"></i></div>
+    </div>
+  </footer>
+</section>
